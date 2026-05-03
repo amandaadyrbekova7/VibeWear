@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="content-wrap catalog-page">
+    <h1>Каталог</h1>
+    <p class="subtext">Найдите свой идеальный стиль</p>
+
+    <form method="get" class="search-box">
+        <input type="text" name="q" placeholder="Поиск товаров..." value="{{ query }}">
+        <button type="submit">Поиск</button>
+    </form>
+
+    <div class="filter-row">
+        {% for cat in categories %}
+            {% if cat == "Все" %}
+                <a href="{% url 'catalog' %}" class="filter-btn {% if not selected_category %}active{% endif %}">{{ cat }}</a>
+            {% else %}
+                <a href="{% url 'catalog' %}?category={{ cat }}" class="filter-btn {% if selected_category == cat %}active{% endif %}">{{ cat }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="catalog-grid">
+        {% for item in products %}
+        <div class="catalog-card">
+            <div class="tag">{{ item.category }}</div>
+            <img src="{{ item.image }}" alt="{{ item.name }}">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.price }} сом</p>
+            <a href="{% url 'product' item.id %}" class="hidden-link"></a>
+        </div>
+        {% empty %}
+        <p>Товары не найдены.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

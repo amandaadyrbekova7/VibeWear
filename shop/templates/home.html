@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="hero">
+    <img src="{% static 'images/aa.jpg' %}" alt="hero">
+
+    <div class="hero-overlay">
+        <h1>Vibe<span>Wear</span></h1>
+        <p>Стиль — это способ сказать, кто ты, не произнося ни слова</p>
+        <a href="{% url 'catalog' %}" class="hero-btn">Смотреть каталог →</a>
+    </div>
+</section>
+
+<section class="section content-wrap">
+    <div class="section-head">
+        <h2>Популярные товары</h2>
+        <a href="{% url 'catalog' %}">Все товары →</a>
+    </div>
+
+    <div class="home-grid">
+        {% for item in featured %}
+        <div class="home-card">
+            <div class="tag">{{ item.category }}</div>
+            <img src="{{ item.image }}" alt="{{ item.name }}">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.price }} сом</p>
+            <a href="{% url 'product' item.id %}" class="hidden-link"></a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section content-wrap">
+    <h2>Категории</h2>
+    <div class="category-grid">
+        {% for cat in categories %}
+        <a href="{% url 'catalog' %}?category={{ cat }}" class="category-box">{{ cat }}</a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

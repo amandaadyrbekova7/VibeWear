@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="success-page-wrap">
+    <div class="success-icon">✓</div>
+    <h1>Заказ оформлен!</h1>
+    <p>Спасибо за покупку. Мы свяжемся с вами в ближайшее время.</p>
+    <a href="{% url 'home' %}" class="home-btn">На главную</a>
+</section>
+{% endblock %}

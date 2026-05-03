@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="product-page-wrap">
+    <a href="{% url 'catalog' %}" class="back-link">← Назад в каталог</a>
+
+    <div class="product-layout">
+        <div class="product-image-box">
+            <img src="{{ product.image }}" alt="{{ product.name }}">
+        </div>
+
+        <div class="product-info-box">
+            <div class="tag product-tag">{{ product.category }}</div>
+            <h1>{{ product.name }}</h1>
+            <div class="product-price">{{ product.price }} сом</div>
+            <p class="product-description">{{ product.description }}</p>
+
+            <div class="sizes-title">Размер</div>
+
+            <form method="get" action="{% url 'add_to_cart' product.id %}">
+                <div class="sizes-row">
+                    <label class="size-option">
+                        <input type="radio" name="size" value="S" required>
+                        <span class="size-btn">S</span>
+                    </label>
+
+                    <label class="size-option">
+                        <input type="radio" name="size" value="M">
+                        <span class="size-btn">M</span>
+                    </label>
+
+                    <label class="size-option">
+                        <input type="radio" name="size" value="L">
+                        <span class="size-btn">L</span>
+                    </label>
+
+                    <label class="size-option">
+                        <input type="radio" name="size" value="XL">
+                        <span class="size-btn">XL</span>
+                    </label>
+                </div>
+
+                {% if added_product_id == product.id %}
+                    <button type="submit" class="cart-btn success-btn">✓ Добавлено</button>
+                {% else %}
+                    <button type="submit" class="cart-btn">Добавить в корзину</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

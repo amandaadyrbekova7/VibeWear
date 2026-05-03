@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="content-wrap checkout-page">
+    <a href="{% url 'cart' %}" class="back-link">← Назад в корзину</a>
+
+    <div class="checkout-box">
+        <h1>Оформление заказа</h1>
+        <div class="checkout-total-text">Итого: <span>{{ total }} сом</span></div>
+
+        <form method="post" class="checkout-form">
+            {% csrf_token %}
+            <label>Имя</label>
+            <input type="text" name="name" placeholder="Ваше имя" required>
+
+            <label>Телефон</label>
+            <input type="text" name="phone" placeholder="+7 (999) 123-45-67" required>
+
+            <label>Адрес доставки</label>
+            <input type="text" name="address" placeholder="Город, улица, дом, квартира" required>
+
+            <button type="submit" class="checkout-btn">Подтвердить заказ</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

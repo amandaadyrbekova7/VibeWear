@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="content-wrap cart-page">
+    <a href="{% url 'catalog' %}" class="back-link">← Продолжить покупки</a>
+    <h1>Корзина</h1>
+
+    {% if items %}
+        <div class="cart-items-box">
+            {% for item in items %}
+                <div class="cart-item">
+                    <img src="{{ item.image }}" alt="{{ item.name }}">
+
+                    <div class="cart-text">
+                        <h3>{{ item.name }}</h3>
+                        <div class="cart-size">Размер: {{ item.size }}</div>
+                        <div class="cart-price">{{ item.price }} сом</div>
+
+                        <div class="qty-row">
+                            <a href="{% url 'decrease' item.index %}" class="qty-circle">−</a>
+                            <span>{{ item.qty }}</span>
+                            <a href="{% url 'increase' item.index %}" class="qty-circle">+</a>
+                        </div>
+                    </div>
+
+                    <a href="{% url 'remove_from_cart' item.index %}" class="delete-btn">🗑</a>
+                </div>
+            {% endfor %}
+
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Товаров в корзине</span>
+                    <strong>{{ total_qty }} шт.</strong>
+                </div>
+
+                <div class="summary-row total-row">
+                    <span>Итого</span>
+                    <strong>{{ total }} сом</strong>
+                </div>
+
+                <a href="{% url 'checkout' %}" class="checkout-btn">Оформить заказ →</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="empty-cart">
+            <p>Корзина пуста</p>
+            <a href="{% url 'catalog' %}" class="checkout-btn">Перейти в каталог</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
