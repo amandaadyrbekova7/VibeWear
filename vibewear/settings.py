@@ -20,15 +20,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", "test-secret-key")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG") == "True"
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
